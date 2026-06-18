@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    新建任务对话框（BottomSheet）
+    包含：下载链接输入、保存路径、分类选择、线程数、速度限制、优先级等
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bottomsheet_background"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <!-- 顶部拖动条 -->
+    <View
+        android:layout_width="40dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/bottomsheet_handle" />
+
+    <!-- 标题 -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/new_task_title"
+        android:textColor="@color/ink"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <!-- 下载链接输入框 -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="@string/hint_download_url"
+        app:boxBackgroundColor="@color/bg"
+        app:boxBackgroundMode="outline"
+        app:boxCornerRadiusBottomEnd="8dp"
+        app:boxCornerRadiusBottomStart="8dp"
+        app:boxCornerRadiusTopEnd="8dp"
+        app:boxCornerRadiusTopStart="8dp"
+        app:boxStrokeColor="@color/rule"
+        app:hintTextColor="@color/muted">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_download_url"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textUri"
+            android:maxLines="3"
+            android:textColor="@color/ink"
+            android:textColorHint="@color/muted"
+            android:textSize="14sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- 剪贴板提示 -->
+    <TextView
+        android:id="@+id/tv_clipboard_hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:background="?attr/selectableItemBackground"
+        android:drawableStart="@drawable/ic_clipboard"
+        android:drawablePadding="6dp"
+        android:padding="8dp"
+        android:text="@string/clipboard_hint"
+        android:textColor="@color/accent"
+        android:textSize="12sp"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <!-- 保存路径选择器 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_save_path"
+            android:textColor="@color/muted"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_save_path"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:ellipsize="middle"
+            android:maxLines="1"
+            android:textColor="@color/ink"
+            android:textSize="14sp"
+            tools:text="/storage/emulated/0/Download" />
+
+        <ImageButton
+            android:id="@+id/btn_browse_path"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/content_desc_browse"
+            android:src="@drawable/ic_folder"
+            android:tint="@color/accent" />
+
+    </LinearLayout>
+
+    <!-- 分类下拉选择 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_category"
+            android:textColor="@color/muted"
+            android:textSize="14sp" />
+
+        <Spinner
+            android:id="@+id/spinner_category"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:background="@drawable/spinner_background"
+            android:padding="8dp" />
+
+    </LinearLayout>
+
+    <!-- 线程数滑块 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_threads"
+                android:textColor="@color/muted"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_threads_value"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:textColor="@color/accent"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                tools:text="9" />
+
+        </LinearLayout>
+
+        <SeekBar
+            android:id="@+id/seekbar_threads"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:max="8"
+            android:progress="8"
+            android:progressDrawable="@drawable/seekbar_progress"
+            android:thumb="@drawable/seekbar_thumb" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="1"
+                android:textColor="@color/muted"
+                android:textSize="11sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="9"
+                android:textColor="@color/muted"
+                android:textSize="11sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- 速度限制 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switch_speed_limit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:switchTint="@color/accent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/label_speed_limit"
+            android:textColor="@color/muted"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/et_speed_limit"
+            android:layout_width="60dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/edittext_background"
+            android:enabled="false"
+            android:inputType="number"
+            android:padding="8dp"
+            android:text="1024"
+            android:textColor="@color/ink"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@string/unit_kb_s"
+            android:textColor="@color/muted"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+    <!-- 优先级选择 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_priority"
+            android:textColor="@color/muted"
+            android:textSize="14sp" />
+
+        <RadioGroup
+            android:id="@+id/rg_priority"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb_priority_normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/priority_normal"
+                android:textColor="@color/ink"
+                android:textSize="13sp" />
+
+            <RadioButton
+                android:id="@+id/rb_priority_high"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/priority_high"
+                android:textColor="@color/ink"
+                android:textSize="13sp" />
+
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <!-- 立即开始开关 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switch_start_immediately"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            app:switchTint="@color/accent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/label_start_immediately"
+            android:textColor="@color/muted"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <!-- 按钮组 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:orientation="horizontal">
+
+        <!-- 取消按钮 -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_cancel"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:text="@string/btn_cancel"
+            android:textColor="@color/muted"
+            app:cornerRadius="8dp"
+            app:strokeColor="@color/rule" />
+
+        <!-- 确认按钮 -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_confirm"
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/accent"
+            android:text="@string/btn_add_task"
+            android:textColor="@color/bg"
+            app:cornerRadius="8dp" />
+
+    </LinearLayout>
+
+</LinearLayout>

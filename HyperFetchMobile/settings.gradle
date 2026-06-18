@@ -1,0 +1,12 @@
+/*
+ * HyperFetchMobile 项目设置文件
+ * 用于定义项目名称和包含的模块
+ */
+
+// 定义项目名称
+rootProject.name = "HyperFetchMobile"
+
+// 包含 app 模块
+// 如果有其他模块，可以在此处添加，例如：
+// include ':feature1', ':feature2', ':common'
+include ':app'

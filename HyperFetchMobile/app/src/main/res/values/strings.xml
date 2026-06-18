@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    字符串资源文件
+    定义应用中使用的所有字符串
+-->
+<resources>
+    <!-- 应用名称 -->
+    <string name="app_name">HyperFetch</string>
+
+    <!-- 下载相关字符串 -->
+    <string name="download_service_name">下载服务</string>
+    <string name="download_notification_channel_name">下载通知</string>
+    <string name="download_notification_channel_desc">显示下载进度和状态</string>
+
+    <!-- 下载状态 -->
+    <string name="status_pending">等待中</string>
+    <string name="status_downloading">下载中</string>
+    <string name="status_paused">已暂停</string>
+    <string name="status_completed">已完成</string>
+    <string name="status_failed">下载失败</string>
+    <string name="status_cancelled">已取消</string>
+
+    <!-- 通知相关 -->
+    <string name="notification_download_start">开始下载</string>
+    <string name="notification_download_progress">下载中 %1$d%%</string>
+    <string name="notification_download_complete">下载完成</string>
+    <string name="notification_download_failed">下载失败</string>
+    <string name="notification_click_to_view">点击查看详情</string>
+
+    <!-- 权限相关 -->
+    <string name="permission_storage_required">需要存储权限以保存下载文件</string>
+    <string name="permission_notification_required">需要通知权限以显示下载进度</string>
+
+    <!-- 错误信息 -->
+    <string name="error_network_unavailable">网络不可用</string>
+    <string name="error_download_failed">下载失败</string>
+    <string name="error_file_write_failed">文件写入失败</string>
+    <string name="error_invalid_url">无效的下载链接</string>
+
+    <!-- 通用按钮 -->
+    <string name="btn_ok">确定</string>
+    <string name="btn_cancel">取消</string>
+    <string name="btn_retry">重试</string>
+    <string name="btn_pause">暂停</string>
+    <string name="btn_resume">继续</string>
+    <string name="btn_delete">删除</string>
+
+    <!-- ========== 主界面字符串 ========== -->
+    <!-- Tab 分类标签 -->
+    <string name="tab_all">全部</string>
+    <string name="tab_video">视频</string>
+    <string name="tab_audio">音频</string>
+    <string name="tab_archive">压缩包</string>
+    <string name="tab_other">其他</string>
+
+    <!-- 空状态提示 -->
+    <string name="empty_task_list">暂无下载任务</string>
+
+    <!-- 内容描述 -->
+    <string name="content_desc_search">搜索</string>
+    <string name="content_desc_more">更多操作</string>
+    <string name="content_desc_new_task">新建任务</string>
+    <string name="content_desc_pause">暂停</string>
+    <string name="content_desc_resume">继续下载</string>
+    <string name="content_desc_cancel">取消</string>
+    <string name="content_desc_open">打开文件</string>
+    <string name="content_desc_delete">删除</string>
+    <string name="content_desc_browse">浏览文件夹</string>
+    <string name="content_desc_battery_settings">电池设置</string>
+
+    <!-- ========== 底部统计栏字符串 ========== -->
+    <string name="stats_concurrent">并发数</string>
+    <string name="stats_speed">总速度</string>
+    <string name="stats_tasks">任务数</string>
+
+    <!-- ========== 新建任务对话框字符串 ========== -->
+    <string name="new_task_title">新建下载任务</string>
+    <string name="hint_download_url">输入下载链接</string>
+    <string name="clipboard_hint">点击粘贴剪贴板链接</string>
+    <string name="label_save_path">保存路径</string>
+    <string name="label_category">分类</string>
+    <string name="label_threads">线程数</string>
+    <string name="label_speed_limit">速度限制</string>
+    <string name="unit_kb_s">KB/s</string>
+    <string name="label_priority">优先级</string>
+    <string name="priority_normal">普通</string>
+    <string name="priority_high">高</string>
+    <string name="label_start_immediately">立即开始下载</string>
+    <string name="btn_add_task">添加任务</string>
+
+    <!-- ========== 设置页面字符串 ========== -->
+    <string name="settings_title">设置</string>
+    <string name="settings_group_download">下载设置</string>
+    <string name="settings_multi_task_title">多任务同时下载</string>
+    <string name="settings_multi_task_desc">允许多个任务同时下载</string>
+    <string name="settings_max_concurrent_title">最大同时下载任务数</string>
+    <string name="settings_queue_strategy_title">排队策略</string>
+    <string name="settings_queue_strategy_desc">当达到最大并发数时，新任务的排队方式</string>
+    <string name="queue_strategy_priority">优先级优先</string>
+    <string name="queue_strategy_time">创建时间优先</string>
+    <string name="settings_group_network">网络设置</string>
+    <string name="settings_wifi_only_title">仅 Wi-Fi 下载</string>
+    <string name="settings_wifi_only_desc">仅在 Wi-Fi 网络下进行下载</string>
+    <string name="settings_group_battery">电池设置</string>
+    <string name="settings_battery_optimization_title">电池优化白名单</string>
+    <string name="settings_battery_optimization_desc">将应用加入电池优化白名单，避免后台下载被中断</string>
+
+    <!-- ========== 任务状态徽章字符串 ========== -->
+    <string name="badge_downloading">下载中</string>
+    <string name="badge_paused">已暂停</string>
+    <string name="badge_completed">已完成</string>
+    <string name="badge_queued">排队中</string>
+    <string name="badge_failed">失败</string>
+
+    <!-- ========== 时间格式字符串 ========== -->
+    <string name="time_remaining">剩余 %1$s</string>
+    <string name="time_minutes">%1$d分钟</string>
+    <string name="time_hours">%1$d小时</string>
+    <string name="time_seconds">%1$d秒</string>
+
+    <!-- ========== 文件类型徽章字符串 ========== -->
+    <string name="type_video">VIDEO</string>
+    <string name="type_audio">AUDIO</string>
+    <string name="type_archive">ARCHIVE</string>
+    <string name="type_other">OTHER</string>
+</resources>

@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    任务卡片布局
+    显示单个下载任务的信息
+    包含：类型徽章、文件名、状态徽章、文件信息、进度条、操作按钮
+-->
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="12dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="12dp"
+    android:layout_marginBottom="8dp"
+    app:cardBackgroundColor="@color/bg2"
+    app:cardCornerRadius="@dimen/card_corner_radius"
+    app:cardElevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <!-- 第一行：类型徽章 + 文件名 + 状态徽章 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <!-- 类型徽章 -->
+            <TextView
+                android:id="@+id/tv_type_badge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/badge_type"
+                android:paddingStart="6dp"
+                android:paddingTop="2dp"
+                android:paddingEnd="6dp"
+                android:paddingBottom="2dp"
+                android:textColor="@color/bg"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                tools:text="VIDEO" />
+
+            <!-- 文件名 -->
+            <TextView
+                android:id="@+id/tv_file_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:ellipsize="middle"
+                android:maxLines="1"
+                android:textColor="@color/ink"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                tools:text="sample_video_file_name.mp4" />
+
+            <!-- 状态徽章 -->
+            <TextView
+                android:id="@+id/tv_status_badge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/badge_status"
+                android:paddingStart="6dp"
+                android:paddingTop="2dp"
+                android:paddingEnd="6dp"
+                android:paddingBottom="2dp"
+                android:textColor="@color/bg"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                tools:text="下载中" />
+
+        </LinearLayout>
+
+        <!-- 第二行：文件大小 + 线程数 + 剩余时间 + 下载速度 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <!-- 文件大小 -->
+            <TextView
+                android:id="@+id/tv_file_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/muted"
+                android:textSize="12sp"
+                tools:text="1.2 GB" />
+
+            <!-- 分隔点 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="6dp"
+                android:text="·"
+                android:textColor="@color/muted"
+                android:textSize="12sp" />
+
+            <!-- 线程数 -->
+            <TextView
+                android:id="@+id/tv_threads"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/muted"
+                android:textSize="12sp"
+                tools:text="9线程" />
+
+            <!-- 分隔点 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="6dp"
+                android:text="·"
+                android:textColor="@color/muted"
+                android:textSize="12sp" />
+
+            <!-- 剩余时间 -->
+            <TextView
+                android:id="@+id/tv_remaining_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/muted"
+                android:textSize="12sp"
+                tools:text="剩余 5分钟" />
+
+            <!-- 下载速度（右对齐） -->
+            <TextView
+                android:id="@+id/tv_speed"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:textColor="@color/accent"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                tools:text="12.5 MB/s" />
+
+        </LinearLayout>
+
+        <!-- 进度条：渐变流光效果 -->
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="@style/Widget.HyperFetch.ProgressBar.Gradient"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/progress_bar_height_lg"
+            android:layout_marginTop="10dp"
+            android:max="100"
+            android:progress="65"
+            android:progressDrawable="@drawable/progress_gradient" />
+
+        <!-- 第三行：进度百分比 + 操作按钮 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <!-- 进度百分比 -->
+            <TextView
+                android:id="@+id/tv_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/ink"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                tools:text="65%" />
+
+            <!-- 已下载/总大小 -->
+            <TextView
+                android:id="@+id/tv_downloaded"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:textColor="@color/muted"
+                android:textSize="12sp"
+                tools:text="780 MB / 1.2 GB" />
+
+            <!-- 操作按钮组 -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!-- 暂停/继续按钮 -->
+                <ImageButton
+                    android:id="@+id/btn_pause_resume"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/content_desc_pause"
+                    android:src="@drawable/ic_pause"
+                    android:tint="@color/muted" />
+
+                <!-- 取消按钮 -->
+                <ImageButton
+                    android:id="@+id/btn_cancel"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/content_desc_cancel"
+                    android:src="@drawable/ic_close"
+                    android:tint="@color/muted" />
+
+                <!-- 打开按钮（完成后显示） -->
+                <ImageButton
+                    android:id="@+id/btn_open"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/content_desc_open"
+                    android:src="@drawable/ic_folder"
+                    android:tint="@color/muted"
+                    android:visibility="gone" />
+
+                <!-- 删除按钮 -->
+                <ImageButton
+                    android:id="@+id/btn_delete"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/content_desc_delete"
+                    android:src="@drawable/ic_delete"
+                    android:tint="@color/danger" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

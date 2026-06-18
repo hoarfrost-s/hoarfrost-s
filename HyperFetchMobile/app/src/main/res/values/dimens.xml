@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    尺寸资源文件
+    定义应用中使用的尺寸值
+-->
+<resources>
+    <!-- 默认间距 -->
+    <dimen name="spacing_xs">4dp</dimen>
+    <dimen name="spacing_sm">8dp</dimen>
+    <dimen name="spacing_md">16dp</dimen>
+    <dimen name="spacing_lg">24dp</dimen>
+    <dimen name="spacing_xl">32dp</dimen>
+    <dimen name="spacing_xxl">48dp</dimen>
+
+    <!-- 文本尺寸 -->
+    <dimen name="text_size_xs">10sp</dimen>
+    <dimen name="text_size_sm">12sp</dimen>
+    <dimen name="text_size_md">14sp</dimen>
+    <dimen name="text_size_lg">16sp</dimen>
+    <dimen name="text_size_xl">18sp</dimen>
+    <dimen name="text_size_xxl">20sp</dimen>
+    <dimen name="text_size_title">24sp</dimen>
+    <dimen name="text_size_headline">28sp</dimen>
+
+    <!-- 组件尺寸 -->
+    <dimen name="button_height">48dp</dimen>
+    <dimen name="button_height_sm">36dp</dimen>
+    <dimen name="button_height_lg">56dp</dimen>
+
+    <!-- 图标尺寸 -->
+    <dimen name="icon_size_sm">16dp</dimen>
+    <dimen name="icon_size_md">24dp</dimen>
+    <dimen name="icon_size_lg">32dp</dimen>
+    <dimen name="icon_size_xl">48dp</dimen>
+
+    <!-- 圆角半径 -->
+    <dimen name="corner_radius_sm">4dp</dimen>
+    <dimen name="corner_radius_md">8dp</dimen>
+    <dimen name="corner_radius_lg">12dp</dimen>
+    <dimen name="corner_radius_xl">16dp</dimen>
+
+    <!-- 卡片尺寸 -->
+    <dimen name="card_elevation">4dp</dimen>
+    <dimen name="card_corner_radius">12dp</dimen>
+
+    <!-- 列表项尺寸 -->
+    <dimen name="list_item_height">72dp</dimen>
+    <dimen name="list_item_height_sm">56dp</dimen>
+    <dimen name="list_item_height_lg">88dp</dimen>
+
+    <!-- 进度条尺寸 -->
+    <dimen name="progress_bar_height">4dp</dimen>
+    <dimen name="progress_bar_height_lg">8dp</dimen>
+
+    <!-- ========== 任务卡片尺寸 (375px 标准宽度设计) ========== -->
+    <!-- 任务卡片边距 -->
+    <dimen name="task_card_margin_start">12dp</dimen>
+    <dimen name="task_card_margin_end">12dp</dimen>
+    <dimen name="task_card_margin_top">8dp</dimen>
+    <dimen name="task_card_margin_bottom">8dp</dimen>
+    <!-- 任务卡片内边距 -->
+    <dimen name="task_card_padding">12dp</dimen>
+    <!-- 任务卡片圆角 -->
+    <dimen name="task_card_corner_radius">12dp</dimen>
+    <!-- 任务卡片进度条高度 -->
+    <dimen name="task_card_progress_height">8dp</dimen>
+    <!-- 任务卡片进度条顶部间距 -->
+    <dimen name="task_card_progress_margin_top">10dp</dimen>
+    <!-- 任务卡片徽章圆角 -->
+    <dimen name="badge_corner_radius">4dp</dimen>
+    <!-- 任务卡片徽章内边距 -->
+    <dimen name="badge_padding_horizontal">6dp</dimen>
+    <dimen name="badge_padding_vertical">2dp</dimen>
+    <!-- 任务卡片操作按钮尺寸 -->
+    <dimen name="task_card_button_size">36dp</dimen>
+    <!-- 任务卡片文件名文字大小 -->
+    <dimen name="task_card_filename_size">14sp</dimen>
+    <!-- 任务卡片信息文字大小 -->
+    <dimen name="task_card_info_size">12sp</dimen>
+    <!-- 任务卡片进度文字大小 -->
+    <dimen name="task_card_progress_size">13sp</dimen>
+    <!-- 任务卡片徽章文字大小 -->
+    <dimen name="task_card_badge_size">10sp</dimen>
+
+    <!-- ========== 底部统计栏尺寸 ========== -->
+    <!-- 统计栏内边距 -->
+    <dimen name="stats_bar_padding_horizontal">16dp</dimen>
+    <dimen name="stats_bar_padding_vertical">12dp</dimen>
+    <!-- 统计栏分隔线高度 -->
+    <dimen name="stats_bar_divider_height">32dp</dimen>
+    <!-- 统计栏数值文字大小 -->
+    <dimen name="stats_bar_value_size">16sp</dimen>
+    <!-- 统计栏标签文字大小 -->
+    <dimen name="stats_bar_label_size">11sp</dimen>
+
+    <!-- ========== 新建任务对话框尺寸 ========== -->
+    <!-- 对话框内边距 -->
+    <dimen name="new_task_dialog_padding">20dp</dimen>
+    <!-- 对话框顶部拖动条宽度 -->
+    <dimen name="bottomsheet_handle_width">40dp</dimen>
+    <!-- 对话框顶部拖动条高度 -->
+    <dimen name="bottomsheet_handle_height">4dp</dimen>
+    <!-- 对话框圆角 -->
+    <dimen name="bottomsheet_corner_radius">16dp</dimen>
+    <!-- 对话框标题文字大小 -->
+    <dimen name="new_task_title_size">18sp</dimen>
+    <!-- 对话框标签文字大小 -->
+    <dimen name="new_task_label_size">14sp</dimen>
+    <!-- 对话框按钮高度 -->
+    <dimen name="new_task_button_height">48dp</dimen>
+</resources>

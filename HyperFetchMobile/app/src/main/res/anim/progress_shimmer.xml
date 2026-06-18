@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    进度条流光动画
+    用于下载进度条上的流光效果，增强视觉吸引力
+    通过位移动画实现从左到右的流光效果
+-->
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 流光位移动画 -->
+    <translate
+        android:duration="1500"
+        android:fromXDelta="-100%"
+        android:interpolator="@android:anim/linear_interpolator"
+        android:repeatCount="infinite"
+        android:repeatMode="restart"
+        android:toXDelta="100%" />
+    <!-- 透明度渐变动画 -->
+    <alpha
+        android:duration="750"
+        android:fromAlpha="0.3"
+        android:interpolator="@android:anim/accelerate_decelerate_interpolator"
+        android:repeatCount="infinite"
+        android:repeatMode="reverse"
+        android:toAlpha="0.8" />
+</set>

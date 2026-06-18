@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    底部统计栏背景
+    用于底部显示下载统计信息的栏背景
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <!-- 背景色 - 次背景色 -->
+    <solid android:color="@color/bg2" />
+    <!-- 顶部圆角 -->
+    <corners
+        android:topLeftRadius="16dp"
+        android:topRightRadius="16dp" />
+</shape>

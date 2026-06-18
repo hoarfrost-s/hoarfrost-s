@@ -1,0 +1,135 @@
+# =====================================================
+# HyperFetchMobile 项目 Git 忽略配置
+# =====================================================
+
+# ----------------------
+# Android Studio / IntelliJ IDEA
+# ----------------------
+# IDE 配置文件
+.idea/
+*.iml
+*.iws
+*.ipr
+*.ids
+.idea_modules/
+
+# ----------------------
+# Gradle
+# ----------------------
+# Gradle 缓存和构建输出
+.gradle/
+build/
+*/build/
+out/
+*/out/
+
+# Gradle 包装器（可选，根据团队约定）
+# gradle/wrapper/gradle-wrapper.jar
+
+# 本地 Gradle 配置
+local.properties
+
+# ----------------------
+# Android
+# ----------------------
+# APK 文件
+*.apk
+*.ap_
+*.aab
+
+# DEX 文件
+*.dex
+
+# 编译后的类文件
+*.class
+
+# 生成的文件
+bin/
+gen/
+*/bin/
+*/gen/
+
+# ProGuard 生成的文件
+proguard/
+mapping.txt
+
+# Lint 输出
+lint-results.xml
+lint-results_files/
+
+# ----------------------
+# 签名和密钥
+# ----------------------
+# 密钥库文件（重要：不要提交到版本控制）
+*.jks
+*.keystore
+keystore.properties
+
+# ----------------------
+# 日志和临时文件
+# ----------------------
+# 日志文件
+*.log
+*.txt
+logs/
+
+# 临时文件
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# 备份文件
+*.bak
+*.backup
+
+# ----------------------
+# 操作系统生成文件
+# ----------------------
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+
+# ----------------------
+# 测试和覆盖率
+# ----------------------
+# 测试输出
+test-results/
+test-reports/
+
+# 覆盖率报告
+coverage/
+*.ec
+*.em
+
+# ----------------------
+# 其他
+# ----------------------
+# 打包文件
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# 虚拟机崩溃日志
+hs_err_pid*
+replay_pid*
+
+# 敏感信息文件
+secrets.properties
+api_keys.properties
+credentials.properties

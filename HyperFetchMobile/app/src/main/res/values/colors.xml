@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    颜色资源文件
+    定义应用中使用的所有颜色
+-->
+<resources>
+    <!-- ==================== 暗色主题颜色 ==================== -->
+    <!-- 主背景色 - 深灰黑 -->
+    <color name="bg">#0D0D0D</color>
+    <!-- 次背景色 - 用于卡片、底部栏等 -->
+    <color name="bg2">#1A1A1A</color>
+    <!-- 文字颜色 - 白色系 -->
+    <color name="ink">#FFFFFF</color>
+    <!-- 文字次要颜色 - 半透明白 -->
+    <color name="ink_secondary">#B3FFFFFF</color>
+    <!-- 文字提示颜色 - 更淡的白色 -->
+    <color name="ink_hint">#66FFFFFF</color>
+    <!-- 主强调色 - 亮绿色 -->
+    <color name="accent">#00FF9D</color>
+    <!-- 次强调色 - 青色 -->
+    <color name="accent2">#00D4FF</color>
+
+    <!-- ==================== 主色调（兼容旧主题） ==================== -->
+    <color name="colorPrimary">#2196F3</color>
+    <color name="colorPrimaryDark">#1976D2</color>
+    <color name="colorAccent">#FF5722</color>
+
+    <!-- ==================== 背景色（兼容旧主题） ==================== -->
+    <color name="background">#FFFFFF</color>
+    <color name="backgroundDark">#121212</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="surfaceDark">#1E1E1E</color>
+
+    <!-- ==================== 文本色（兼容旧主题） ==================== -->
+    <color name="textPrimary">#212121</color>
+    <color name="textSecondary">#757575</color>
+    <color name="textHint">#9E9E9E</color>
+    <color name="textPrimaryDark">#FFFFFF</color>
+    <color name="textSecondaryDark">#B0B0B0</color>
+
+    <!-- ==================== 状态颜色 ==================== -->
+    <color name="statusPending">#FFC107</color>
+    <color name="statusDownloading">#4CAF50</color>
+    <color name="statusPaused">#FF9800</color>
+    <color name="statusCompleted">#2196F3</color>
+    <color name="statusFailed">#F44336</color>
+    <color name="statusCancelled">#9E9E9E</color>
+
+    <!-- ==================== 功能色 ==================== -->
+    <color name="success">#4CAF50</color>
+    <color name="warning">#FFC107</color>
+    <color name="error">#F44336</color>
+    <color name="info">#2196F3</color>
+
+    <!-- ==================== 分隔线和边框 ==================== -->
+    <color name="divider">#E0E0E0</color>
+    <color name="border">#E0E0E0</color>
+    <!-- 暗色主题边框 -->
+    <color name="border_dark">#33FFFFFF</color>
+
+    <!-- ==================== 透明色 ====================<!-- 透明色 -->
+    <color name="transparent">#00000000</color>
+    <color name="semiTransparent">#80000000</color>
+
+    <!-- ========== 暗色主题颜色 (375px 标准宽度设计) ========== -->
+    <!-- 主背景色 -->
+    <color name="bg">#0b0d12</color>
+    <!-- 次级背景色（卡片、标题栏等） -->
+    <color name="bg2">#131720</color>
+    <!-- 主要文字颜色 -->
+    <color name="ink">#e9ecf2</color>
+    <!-- 次要/提示文字颜色 -->
+    <color name="muted">#8a93a6</color>
+    <!-- 分隔线颜色 -->
+    <color name="rule">#232936</color>
+    <!-- 主强调色（金色） -->
+    <color name="accent">#ffb547</color>
+    <!-- 次强调色（蓝色） -->
+    <color name="accent2">#5fa8ff</color>
+    <!-- 危险/删除颜色 -->
+    <color name="danger">#ff6b6b</color>
+    <!-- 成功/完成颜色 -->
+    <color name="ok">#44d4a4</color>
+</resources>

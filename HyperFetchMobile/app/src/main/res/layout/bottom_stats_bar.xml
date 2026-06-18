@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    底部统计栏布局
+    显示：并发数、总下载速度、任务总数
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/bg2"
+    android:elevation="8dp"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingStart="16dp"
+    android:paddingTop="12dp"
+    android:paddingEnd="16dp"
+    android:paddingBottom="12dp">
+
+    <!-- 并发数显示 -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_concurrent_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/accent"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:text="3/5" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="@string/stats_concurrent"
+            android:textColor="@color/muted"
+            android:textSize="11sp" />
+
+    </LinearLayout>
+
+    <!-- 分隔线 -->
+    <View
+        android:layout_width="1dp"
+        android:layout_height="32dp"
+        android:background="@color/rule" />
+
+    <!-- 总下载速度显示 -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_total_speed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/ok"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:text="25.8 MB/s" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="@string/stats_speed"
+            android:textColor="@color/muted"
+            android:textSize="11sp" />
+
+    </LinearLayout>
+
+    <!-- 分隔线 -->
+    <View
+        android:layout_width="1dp"
+        android:layout_height="32dp"
+        android:background="@color/rule" />
+
+    <!-- 任务总数显示 -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_task_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/ink"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:text="12" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="@string/stats_tasks"
+            android:textColor="@color/muted"
+            android:textSize="11sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    下载中状态徽章背景
+    用于显示正在下载的任务状态
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <!-- 背景色 - 半透明绿色 -->
+    <solid android:color="#334CAF50" />
+    <!-- 圆角 -->
+    <corners android:radius="4dp" />
+</shape>

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    主界面布局
+    包含：顶部标题栏、TabLayout分类切换、任务列表、底部统计栏、悬浮按钮
+    设计宽度：375px 标准宽度
+-->
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:fitsSystemWindows="true"
+    tools:context=".ui.MainActivity">
+
+    <!-- 主内容区域 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- 顶部标题栏 -->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/bg2"
+            android:elevation="4dp"
+            app:contentInsetStartWithNavigation="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <!-- 品牌名称 -->
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/app_name"
+                    android:textColor="@color/ink"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <!-- 搜索按钮 -->
+                <ImageButton
+                    android:id="@+id/btn_search"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/content_desc_search"
+                    android:src="@drawable/ic_search"
+                    android:tint="@color/muted" />
+
+                <!-- 更多操作按钮 -->
+                <ImageButton
+                    android:id="@+id/btn_more"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/content_desc_more"
+                    android:src="@drawable/ic_more_vert"
+                    android:tint="@color/muted" />
+
+            </LinearLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <!-- TabLayout 分类切换 -->
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/bg2"
+            android:elevation="2dp"
+            app:tabIndicatorColor="@color/accent"
+            app:tabIndicatorHeight="2dp"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="@color/ink"
+            app:tabTextColor="@color/muted"
+            app:tabTextAppearance="@style/TextAppearance.HyperFetch.Tab">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tab_all" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tab_video" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tab_audio" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tab_archive" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tab_other" />
+
+        </com.google.android.material.tabs.TabLayout>
+
+        <!-- 任务列表区域 -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <!-- 任务列表 -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_tasks"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:paddingBottom="80dp"
+                tools:listitem="@layout/item_task_card" />
+
+            <!-- 空状态提示 -->
+            <LinearLayout
+                android:id="@+id/empty_state"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <ImageView
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:alpha="0.3"
+                    android:src="@drawable/ic_download"
+                    android:tint="@color/muted" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/empty_task_list"
+                    android:textColor="@color/muted"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <!-- 底部统计栏 -->
+        <include
+            android:id="@+id/bottom_stats_bar"
+            layout="@layout/bottom_stats_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <!-- 悬浮按钮 - 新建任务 -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_new_task"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/content_desc_new_task"
+        android:src="@drawable/ic_add"
+        app:backgroundTint="@color/accent"
+        app:elevation="6dp"
+        app:fabSize="normal"
+        app:tint="@color/bg" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

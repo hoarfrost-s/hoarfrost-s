@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    FileProvider 路径配置文件
+    定义应用可分享的文件路径
+-->
+<paths>
+    <!-- 外部存储根目录 -->
+    <external-path
+        name="external_files"
+        path="." />
+
+    <!-- 外部存储下载目录 -->
+    <external-path
+        name="download_files"
+        path="Download" />
+
+    <!-- 应用私有外部存储目录 -->
+    <external-files-path
+        name="external_app_files"
+        path="." />
+
+    <!-- 应用私有外部缓存目录 -->
+    <external-cache-path
+        name="external_cache"
+        path="." />
+
+    <!-- 应用内部文件目录 -->
+    <files-path
+        name="internal_files"
+        path="." />
+
+    <!-- 应用内部缓存目录 -->
+    <cache-path
+        name="internal_cache"
+        path="." />
+
+    <!-- 自定义下载目录 -->
+    <external-path
+        name="hyperfetch_downloads"
+        path="HyperFetch" />
+</paths>

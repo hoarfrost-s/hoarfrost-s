@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    其他类型徽章背景
+    用于标识其他类型文件的下载任务
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <!-- 背景色 - 半透明灰色 -->
+    <solid android:color="#339E9E9E" />
+    <!-- 圆角 -->
+    <corners android:radius="4dp" />
+</shape>
