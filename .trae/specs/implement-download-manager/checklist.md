@@ -1,0 +1,33 @@
+# Checklist
+
+- [x] 项目结构：Gradle 多模块项目可正常 Sync 和 Build
+- [x] 项目结构：Hilt DI 正确配置，无编译错误
+- [x] common 模块：FileCategory 枚举覆盖全部 7 个类别及后缀映射
+- [x] common 模块：TaskStatus 状态机覆盖所有状态及合法转换
+- [x] common 模块：UrlParser 正确提取 URL 后缀和文件名
+- [x] domain 模块：AddTaskUseCase 正确解析 URL 并创建任务
+- [x] domain 模块：所有 UseCase 接口定义完整
+- [x] data 模块：Room Database 编译通过，DAO 查询正确
+- [x] data 模块：SettingsDataStore 读写配置正确
+- [x] engine 模块：SemaphoreSlotManager 并发控制正确（tryAcquire/release/resize）
+- [x] engine 模块：TokenBucketRateLimiter 限速逻辑正确（不限速/限速场景）
+- [x] engine 模块：SegmentDispatcher 分段下载逻辑正确，Range 请求正确
+- [x] engine 模块：DownloadEngine 支持断点续传和进度回调
+- [x] engine 模块：TaskScheduler FIFO 调度正确（排队/调度/释放槽位）
+- [x] engine 模块：M3u8Parser 正确解析 Master/Media Playlist
+- [x] service 模块：DownloadForegroundService 前台服务正常启动/停止
+- [x] service 模块：通知栏进度展示正确，快捷操作按钮有效
+- [x] service 模块：NetworkMonitor 正确监听网络状态变化
+- [x] UI 首页：任务列表正确展示任务卡片，状态实时更新
+- [x] UI 首页：分块进度条正确显示各线程独立进度，动画流畅
+- [x] UI 首页：搜索和筛选功能正常
+- [x] UI 首页：添加任务 BottomSheet 正确解析链接信息并预览
+- [x] UI 首页：手势操作（左滑/右滑/长按多选）正常
+- [x] UI 详情页：链接信息完整展示（URL、文件名、大小、类型、分类、Content-Type、线程数、保存路径、创建时间）
+- [x] UI 分类页：分类浏览和文件管理正常
+- [x] UI 设置页：所有配置项可正常调整并持久化
+- [x] UI 主题：深色/浅色/跟随系统主题切换正常
+- [x] 集成：系统分享 Intent Filter 接收正常
+- [x] 集成：剪贴板 URL 识别正常
+- [x] 集成：APK 下载后自动安装正常
+- [x] 集成：应用重启后任务恢复正常
