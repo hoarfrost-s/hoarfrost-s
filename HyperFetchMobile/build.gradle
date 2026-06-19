@@ -1,34 +1,22 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+// 单一事实来源：AGP 8.2.0 + Gradle 8.2 + JDK 17
 
 buildscript {
-    // 定义版本变量，便于统一管理
     ext {
         // Android Gradle Plugin 版本
         agp_version = '8.2.0'
-        // Kotlin 版本（可选使用）
-        kotlin_version = '1.9.20'
-        // AndroidX 核心库版本
-        core_ktx_version = '1.12.0'
-        // AppCompat 版本
+        // AndroidX 核心库版本（纯 Java）
+        core_version = '1.12.0'
         appcompat_version = '1.6.1'
-        // Material Design 版本
         material_version = '1.11.0'
-        // ConstraintLayout 版本
         constraintlayout_version = '2.1.4'
-        // Lifecycle 版本
         lifecycle_version = '2.7.0'
         // Room 数据库版本
         room_version = '2.6.1'
-        // Retrofit 网络请求版本
-        retrofit_version = '2.9.0'
         // OkHttp 版本
         okhttp_version = '4.12.0'
-        // Coroutines 协程版本
-        coroutines_version = '1.7.3'
         // WorkManager 版本
         work_version = '2.9.0'
-        // Hilt 依赖注入版本
-        hilt_version = '2.50'
         // JUnit 测试版本
         junit_version = '4.13.2'
         // AndroidX Test 版本
@@ -37,41 +25,25 @@ buildscript {
         espresso_version = '3.5.1'
     }
 
-    // 定义仓库源
     repositories {
-        // 优先使用 Google Maven 仓库
         google()
-        // Maven 中央仓库
         mavenCentral()
-        // Gradle 插件门户
         gradlePluginPortal()
     }
 
-    // 定义构建脚本依赖
     dependencies {
         // Android Gradle 插件
         classpath "com.android.tools.build:gradle:$agp_version"
-        // Kotlin Gradle 插件（可选）
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        // Hilt 插件（依赖注入）
-        classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
-
-        // 注意：不要在此处放置应用依赖项，它们应放在模块级的 build.gradle 中
     }
 }
 
-// 为所有项目定义通用配置
 allprojects {
     repositories {
-        // Google Maven 仓库
         google()
-        // Maven 中央仓库
         mavenCentral()
     }
 }
 
-// 定义自定义任务，用于清理构建输出
 task clean(type: Delete) {
-    // 删除根目录下的 build 文件夹
     delete rootProject.buildDir
 }

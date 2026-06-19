@@ -1,0 +1,114 @@
+#!/usr/bin/env bash
+# Gradle Wrapper 启动脚本 (Unix/Linux/macOS)
+# 单一事实来源：本项目使用 Gradle 8.2（对应 AGP 8.2.0 + JDK 17）
+#
+# 本脚本优先尝试使用 gradle-wrapper.jar（标准方式）。
+# 如果 gradle-wrapper.jar 不存在，则自动执行以下步骤：
+# 1. 检查系统是否安装了 gradle，若有则通过 `gradle wrapper` 生成
+# 2. 否则尝试通过系统包管理器安装 gradle
+# 3. 仍失败时提示用户按 README 指引手动准备 Wrapper
+
+set -e
+
+# Gradle 版本（与 gradle-wrapper.properties 保持一致）
+GRADLE_VERSION="8.2"
+# JDK 最低要求
+MIN_JDK_VERSION="17"
+
+SCRIPT_DIR="$( cd "$( dirname "$0" )" && pwd )"
+WRAPPER_JAR="$SCRIPT_DIR/gradle/wrapper/gradle-wrapper.jar"
+
+# 颜色输出（若支持）
+if [ -t 1 ]; then
+  RED=$'\033[31m'; GREEN=$'\033[32m'; YELLOW=$'\033[33m'; BLUE=$'\033[34m'; BOLD=$'\033[1m'; RESET=$'\033[0m'
+else
+  RED=""; GREEN=""; YELLOW=""; BLUE=""; BOLD=""; RESET=""
+fi
+
+log_info()  { echo "${BLUE}[INFO]${RESET} $*"; }
+log_ok()    { echo "${GREEN}[OK]${RESET} $*"; }
+log_warn()  { echo "${YELLOW}[WARN]${RESET} $*"; }
+log_error() { echo "${RED}[ERROR]${RESET} $*"; }
+
+# --- JDK 检查 ---
+check_jdk() {
+  if [ -n "$JAVA_HOME" ] && [ -x "$JAVA_HOME/bin/java" ]; then
+    JAVA="$JAVA_HOME/bin/java"
+  elif command -v java >/dev/null 2>&1; then
+    JAVA="java"
+  else
+    log_error "未找到 Java。请安装 JDK $MIN_JDK_VERSION 以上并设置 JAVA_HOME。"
+    exit 1
+  fi
+  local ver
+  ver=$("$JAVA" -version 2>&1 | head -n 1 | grep -Eo '"[^"]*"' | tr -d '"')
+  local major="${ver%%.*}"
+  if [ "$major" -lt "$MIN_JDK_VERSION" ]; then
+    log_error "当前 JDK 版本为 $ver，但本项目要求 JDK $MIN_JDK_VERSION 及以上。请升级 JDK 后重试。"
+    exit 1
+  fi
+  log_ok "JDK 检查通过 (版本 $ver)"
+}
+
+# --- Wrapper 检查与自动修复 ---
+ensure_wrapper_jar() {
+  if [ -f "$WRAPPER_JAR" ]; then
+    return 0
+  fi
+  log_warn "未找到 $WRAPPER_JAR，尝试自动生成 Wrapper..."
+
+  if command -v gradle >/dev/null 2>&1; then
+    log_info "检测到系统 Gradle：$(gradle --version | head -n 3 | tr '\n' ' ')"
+    log_info "正在执行 gradle wrapper --gradle-version $GRADLE_VERSION --distribution-type bin ..."
+    (cd "$SCRIPT_DIR" && gradle wrapper --gradle-version "$GRADLE_VERSION" --distribution-type bin)
+    if [ -f "$WRAPPER_JAR" ]; then
+      log_ok "Wrapper 生成成功，可以运行 ./gradlew 了。"
+      return 0
+    fi
+  fi
+
+  # 尝试下载 wrapper jar（官方发布源）
+  log_info "尝试从官方下载 gradle-wrapper.jar ..."
+  DOWNLOAD_URL="https://raw.githubusercontent.com/gradle/gradle/v$GRADLE_VERSION/gradle/wrapper/gradle-wrapper.jar"
+  mkdir -p "$SCRIPT_DIR/gradle/wrapper"
+  if command -v curl >/dev/null 2>&1; then
+    curl -fsSL -o "$WRAPPER_JAR" "$DOWNLOAD_URL" || true
+  elif command -v wget >/dev/null 2>&1; then
+    wget -q -O "$WRAPPER_JAR" "$DOWNLOAD_URL" || true
+  fi
+
+  if [ -s "$WRAPPER_JAR" ]; then
+    chmod 644 "$WRAPPER_JAR"
+    log_ok "Wrapper jar 下载成功。"
+    return 0
+  fi
+
+  log_error "无法自动生成 Wrapper。请选择以下任一方式手动处理："
+  echo "  1) 安装系统 Gradle（建议 sdk install gradle 8.2 或 brew install gradle），然后执行:"
+  echo "     $ gradle wrapper --gradle-version 8.2 --distribution-type bin"
+  echo "  2) 使用 Android Studio 打开项目，IDE 会自动生成 Wrapper。"
+  echo "  3) 手动从 GitHub Gradle 官方仓库下载 gradle-wrapper.jar 放入 gradle/wrapper/。"
+  exit 2
+}
+
+# --- 主入口 ---
+check_jdk
+ensure_wrapper_jar
+
+# 标准 gradlew 逻辑
+DEFAULT_JVM_OPTS='"-Xmx64m" "-Xms64m"'
+APP_HOME="$SCRIPT_DIR"
+CLASSPATH="$APP_HOME/gradle/wrapper/gradle-wrapper.jar"
+
+# 收集所有参数
+set -- \
+        -Dorg.gradle.appname="gradlew" \
+        -classpath "$CLASSPATH" \
+        org.gradle.wrapper.GradleWrapperMain \
+        "$@"
+
+# 注意：-Dorg.gradle.java.home 不会影响 JVM 启动 JDK 本身
+exec "$JAVA" "-Dorg.gradle.appname=gradlew" \
+     -classpath "$CLASSPATH" \
+     org.gradle.wrapper.GradleWrapperMain \
+     "$@"
