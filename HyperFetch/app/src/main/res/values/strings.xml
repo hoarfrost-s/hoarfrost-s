@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HyperFetch</string>
+
+    <!-- Tab Labels -->
+    <string name="tab_all">全部</string>
+    <string name="tab_video">视频</string>
+    <string name="tab_audio">音频</string>
+    <string name="tab_archive">压缩包</string>
+    <string name="tab_other">其他</string>
+
+    <!-- Status -->
+    <string name="status_queued">排队中</string>
+    <string name="status_downloading">下载中</string>
+    <string name="status_paused">已暂停</string>
+    <string name="status_completed">已完成</string>
+    <string name="status_failed">失败</string>
+
+    <!-- Actions -->
+    <string name="action_pause">暂停</string>
+    <string name="action_resume">继续</string>
+    <string name="action_delete">删除</string>
+    <string name="action_retry">重试</string>
+    <string name="action_open">打开</string>
+    <string name="action_cancel">取消</string>
+    <string name="action_confirm">确认</string>
+    <string name="action_save">保存</string>
+
+    <!-- New Task -->
+    <string name="new_task_title">新建下载任务</string>
+    <string name="hint_url">输入下载链接</string>
+    <string name="hint_save_path">保存路径</string>
+    <string name="label_category">分类</string>
+    <string name="label_thread_count">线程数</string>
+    <string name="label_speed_limit">速度限制</string>
+    <string name="label_priority">优先级</string>
+    <string name="label_start_now">立即开始</string>
+    <string name="label_unlimited">无限制</string>
+    <string name="label_normal_priority">普通</string>
+    <string name="label_high_priority">高</string>
+
+    <!-- Settings -->
+    <string name="settings_title">设置</string>
+    <string name="setting_multi_task">开启多任务同时下载</string>
+    <string name="setting_max_concurrent">最大同时下载任务数</string>
+    <string name="setting_queue_strategy">排队策略</string>
+    <string name="setting_wifi_only">仅 Wi-Fi 下载</string>
+    <string name="setting_battery_optimization">电池优化白名单</string>
+    <string name="strategy_priority">优先级优先</string>
+    <string name="strategy_time">创建时间优先</string>
+
+    <!-- Statistics -->
+    <string name="stat_concurrent">并发</string>
+    <string name="stat_total_speed">总速度</string>
+    <string name="stat_tasks">任务</string>
+
+    <!-- Notifications -->
+    <string name="notification_channel_name">下载进度</string>
+    <string name="notification_channel_description">显示下载任务进度</string>
+    <string name="notification_downloading">正在下载</string>
+    <string name="notification_completed">下载完成</string>
+    <string name="notification_failed">下载失败</string>
+
+    <!-- Errors -->
+    <string name="error_invalid_url">无效的下载链接</string>
+    <string name="error_network_error">网络错误</string>
+    <string name="error_storage_error">存储错误</string>
+    <string name="error_permission_denied">权限不足</string>
+
+    <!-- Progress -->
+    <string name="progress_format">%1$s / %2$s</string>
+    <string name="eta_format">剩余 %1$s</string>
+    <string name="queue_position">队列第 %1$d 位</string>
+
+    <!-- Empty State -->
+    <string name="empty_no_tasks">暂无下载任务</string>
+    <string name="empty_tap_to_add">点击右下角按钮添加</string>
+
+    <!-- Dialogs -->
+    <string name="dialog_delete_title">删除任务</string>
+    <string name="dialog_delete_message">确定要删除此任务吗？</string>
+    <string name="dialog_delete_file">同时删除已下载文件</string>
+</resources>
