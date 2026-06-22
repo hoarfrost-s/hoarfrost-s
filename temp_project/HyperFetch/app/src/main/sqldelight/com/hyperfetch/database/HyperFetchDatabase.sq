@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS download_tasks AS DownloadTaskEntity (
+CREATE TABLE IF NOT EXISTS download_tasks (
     id TEXT PRIMARY KEY NOT NULL,
     url TEXT NOT NULL,
     fileName TEXT NOT NULL,
@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS download_tasks AS DownloadTaskEntity (
     errorMessage TEXT
 );
 
-CREATE TABLE IF NOT EXISTS task_chunks AS TaskChunkEntity (
+CREATE TABLE IF NOT EXISTS task_chunks (
     taskId TEXT NOT NULL,
     `index` INTEGER NOT NULL,
     start INTEGER NOT NULL,

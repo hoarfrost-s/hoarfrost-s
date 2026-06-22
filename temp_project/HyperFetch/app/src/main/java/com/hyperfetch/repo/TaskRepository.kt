@@ -5,12 +5,13 @@ import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
 import app.cash.sqldelight.coroutines.mapToOneOrNull
 import com.hyperfetch.classify.CategoryService
-import com.hyperfetch.database.DownloadTaskEntity
+import com.hyperfetch.database.Download_tasks
 import com.hyperfetch.database.HyperFetchDatabase
-import com.hyperfetch.database.TaskChunkEntity
+import com.hyperfetch.database.Task_chunks
 import com.hyperfetch.model.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import java.util.Date
 import java.util.UUID
@@ -33,7 +34,7 @@ class TaskRepository(context: Context) {
      * 获取所有任务
      */
     fun getAllTasks(): Flow<List<DownloadTask>> {
-        return database.downloadTasksQueries.selectAllTasks()
+        return database.download_tasksQueries.selectAllTasks()
             .asFlow()
             .mapToList(Dispatchers.IO)
             .map { entities -> entities.map { it.toModel() } }
@@ -43,7 +44,7 @@ class TaskRepository(context: Context) {
      * 获取指定分类的任务
      */
     fun getTasksByCategory(category: Category): Flow<List<DownloadTask>> {
-        return database.downloadTasksQueries.selectTasksByCategory(category.name)
+        return database.download_tasksQueries.selectTasksByCategory(category.name)
             .asFlow()
             .mapToList(Dispatchers.IO)
             .map { entities -> entities.map { it.toModel() } }
@@ -53,7 +54,7 @@ class TaskRepository(context: Context) {
      * 获取指定状态的任务
      */
     fun getTasksByStatus(status: TaskStatus): Flow<List<DownloadTask>> {
-        return database.downloadTasksQueries.selectTasksByStatus(status.name)
+        return database.download_tasksQueries.selectTasksByStatus(status.name)
             .asFlow()
             .mapToList(Dispatchers.IO)
             .map { entities -> entities.map { it.toModel() } }
@@ -64,7 +65,7 @@ class TaskRepository(context: Context) {
      */
     suspend fun getTaskById(taskId: String): DownloadTask? {
         return withContext(Dispatchers.IO) {
-            database.downloadTasksQueries.selectTaskById(taskId)
+            database.download_tasksQueries.selectTaskById(taskId)
                 .executeAsOneOrNull()
                 ?.toModel()
         }
@@ -74,7 +75,7 @@ class TaskRepository(context: Context) {
      * 获取任务（Flow）
      */
     fun getTaskByIdFlow(taskId: String): Flow<DownloadTask?> {
-        return database.downloadTasksQueries.selectTaskById(taskId)
+        return database.download_tasksQueries.selectTaskById(taskId)
             .asFlow()
             .mapToOneOrNull(Dispatchers.IO)
             .map { it?.toModel() }
@@ -85,7 +86,7 @@ class TaskRepository(context: Context) {
      */
     suspend fun getPendingTasks(): List<DownloadTask> {
         return withContext(Dispatchers.IO) {
-            database.downloadTasksQueries.selectPendingTasks()
+            database.download_tasksQueries.selectPendingTasks()
                 .executeAsList()
                 .map { it.toModel() }
         }
@@ -96,8 +97,8 @@ class TaskRepository(context: Context) {
      */
     suspend fun getDownloadingCount(): Int {
         return withContext(Dispatchers.IO) {
-            database.downloadTasksQueries.selectDownloadingCount()
-                .executeAsOne()
+            database.download_tasksQueries.selectDownloadingCount()
+                .executeAsOne().toInt()
         }
     }
 
@@ -106,8 +107,8 @@ class TaskRepository(context: Context) {
      */
     suspend fun getQueuedCount(): Int {
         return withContext(Dispatchers.IO) {
-            database.downloadTasksQueries.selectQueuedCount()
-                .executeAsOne()
+            database.download_tasksQueries.selectQueuedCount()
+                .executeAsOne().toInt()
         }
     }
 
@@ -135,7 +136,7 @@ class TaskRepository(context: Context) {
         )
 
         withContext(Dispatchers.IO) {
-            database.downloadTasksQueries.insertTask(task.toEntity())
+            database.download_tasksQueries.insertTask(task.toEntity())
         }
         return task
     }
@@ -145,7 +146,7 @@ class TaskRepository(context: Context) {
      */
     suspend fun updateTaskStatus(taskId: String, status: TaskStatus) {
         withContext(Dispatchers.IO) {
-            database.downloadTasksQueries.updateTaskStatus(status.name, taskId)
+            database.download_tasksQueries.updateTaskStatus(status.name, taskId)
         }
     }
 
@@ -154,7 +155,7 @@ class TaskRepository(context: Context) {
      */
     suspend fun updateProgress(taskId: String, downloaded: Long, totalSize: Long) {
         withContext(Dispatchers.IO) {
-            database.downloadTasksQueries.updateProgress(downloaded, totalSize, taskId)
+            database.download_tasksQueries.updateProgress(downloaded, totalSize, taskId)
         }
     }
 
@@ -163,7 +164,7 @@ class TaskRepository(context: Context) {
      */
     suspend fun completeTask(taskId: String, downloaded: Long) {
         withContext(Dispatchers.IO) {
-            database.downloadTasksQueries.completeTask(TaskStatus.COMPLETED.name, downloaded, taskId)
+            database.download_tasksQueries.completeTask(TaskStatus.COMPLETED.name, downloaded, taskId)
         }
     }
 
@@ -172,7 +173,7 @@ class TaskRepository(context: Context) {
      */
     suspend fun updateTaskError(taskId: String, status: TaskStatus, errorMessage: String?) {
         withContext(Dispatchers.IO) {
-            database.downloadTasksQueries.updateTaskError(status.name, errorMessage, taskId)
+            database.download_tasksQueries.updateTaskError(status.name, errorMessage, taskId)
         }
     }
 
@@ -181,8 +182,8 @@ class TaskRepository(context: Context) {
      */
     suspend fun deleteTask(taskId: String) {
         withContext(Dispatchers.IO) {
-            database.taskChunksQueries.deleteChunksByTaskId(taskId)
-            database.downloadTasksQueries.deleteTaskById(taskId)
+            database.task_chunksQueries.deleteChunksByTaskId(taskId)
+            database.download_tasksQueries.deleteTaskById(taskId)
         }
     }
 
@@ -191,15 +192,15 @@ class TaskRepository(context: Context) {
      */
     suspend fun deleteTaskAndFile(taskId: String) {
         withContext(Dispatchers.IO) {
-            val task = database.downloadTasksQueries.selectTaskById(taskId)
+            val task = database.download_tasksQueries.selectTaskById(taskId)
                 .executeAsOneOrNull()
 
             task?.let {
                 if (it.savePath.isNotEmpty()) {
                     java.io.File(it.savePath).delete()
                 }
-                database.taskChunksQueries.deleteChunksByTaskId(taskId)
-                database.downloadTasksQueries.deleteTaskById(taskId)
+                database.task_chunksQueries.deleteChunksByTaskId(taskId)
+                database.download_tasksQueries.deleteTaskById(taskId)
             }
         }
     }
@@ -209,7 +210,7 @@ class TaskRepository(context: Context) {
      */
     suspend fun getChunks(taskId: String): List<TaskChunk> {
         return withContext(Dispatchers.IO) {
-            database.taskChunksQueries.selectChunksByTaskId(taskId)
+            database.task_chunksQueries.selectChunksByTaskId(taskId)
                 .executeAsList()
                 .map { it.toModel() }
         }
@@ -222,7 +223,7 @@ class TaskRepository(context: Context) {
         withContext(Dispatchers.IO) {
             database.transaction {
                 chunks.forEach { chunk ->
-                    database.taskChunksQueries.insertChunk(chunk.toEntity())
+                    database.task_chunksQueries.insertChunk(chunk.toEntity())
                 }
             }
         }
@@ -233,7 +234,7 @@ class TaskRepository(context: Context) {
      */
     suspend fun updateChunkProgress(taskId: String, index: Int, downloaded: Long, status: ChunkStatus) {
         withContext(Dispatchers.IO) {
-            database.taskChunksQueries.updateChunk(downloaded, status.name, taskId, index.toLong())
+            database.task_chunksQueries.updateChunk(downloaded, status.name, taskId, index.toLong())
         }
     }
 
@@ -242,14 +243,13 @@ class TaskRepository(context: Context) {
      */
     suspend fun deleteCompletedChunks(taskId: String) {
         withContext(Dispatchers.IO) {
-            database.taskChunksQueries.deleteCompletedChunks(taskId)
+            database.task_chunksQueries.deleteCompletedChunks(taskId)
         }
     }
 
-    /**
-     * 转换实体到模型
-     */
-    private fun DownloadTaskEntity.toModel(): DownloadTask {
+    // ============ 实体转换方法 ============
+
+    private fun Download_tasks.toModel(): DownloadTask {
         return DownloadTask(
             id = id,
             url = url,
@@ -270,11 +270,8 @@ class TaskRepository(context: Context) {
         )
     }
 
-    /**
-     * 转换模型到实体
-     */
-    private fun DownloadTask.toEntity(): DownloadTaskEntity {
-        return DownloadTaskEntity(
+    private fun DownloadTask.toEntity(): Download_tasks {
+        return Download_tasks(
             id = id,
             url = url,
             fileName = fileName,
@@ -292,10 +289,7 @@ class TaskRepository(context: Context) {
         )
     }
 
-    /**
-     * 转换分块实体到模型
-     */
-    private fun TaskChunkEntity.toModel(): TaskChunk {
+    private fun Task_chunks.toModel(): TaskChunk {
         return TaskChunk(
             taskId = taskId,
             index = index.toInt(),
@@ -306,11 +300,8 @@ class TaskRepository(context: Context) {
         )
     }
 
-    /**
-     * 转换分块模型到实体
-     */
-    private fun TaskChunk.toEntity(): TaskChunkEntity {
-        return TaskChunkEntity(
+    private fun TaskChunk.toEntity(): Task_chunks {
+        return Task_chunks(
             taskId = taskId,
             index = index.toLong(),
             start = start,
