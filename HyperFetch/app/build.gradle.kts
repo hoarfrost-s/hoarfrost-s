@@ -1,9 +1,8 @@
-
 plugins {
     id("com.android.application")
     id("kotlin-android")
     id("org.jetbrains.kotlin.plugin.compose")
-    id("com.google.devtools.ksp") version "2.0.21-1.0.28"
+    id("app.cash.sqldelight") version "1.5.5"
 }
 
 android {
@@ -19,10 +18,6 @@ android {
 
         vectorDrawables {
             useSupportLibrary = true
-        }
-
-        ksp {
-            arg("room.schemaLocation", "$projectDir/schemas")
         }
     }
 
@@ -51,6 +46,14 @@ android {
     }
 }
 
+sqldelight {
+    databases {
+        create("HyperFetchDatabase") {
+            packageName.set("com.hyperfetch.database")
+        }
+    }
+}
+
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
     compilerOptions {
         jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.fromTarget("17"))
@@ -58,7 +61,6 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach 
 }
 
 dependencies {
-    // Compose BOM
     implementation(platform("androidx.compose:compose-bom:2025.06.01"))
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-graphics")
@@ -68,35 +70,25 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
-    // Activity & Lifecycle
     implementation("androidx.activity:activity-compose:1.9.3")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.7")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.7")
 
-    // Navigation
     implementation("androidx.navigation:navigation-compose:2.8.5")
 
-    // Room Database
-    implementation("androidx.room:room-runtime:2.6.1")
-    implementation("androidx.room:room-ktx:2.6.1")
-    ksp("androidx.room:room-compiler:2.6.1")
+    implementation("app.cash.sqldelight:android-driver:1.5.5")
+    implementation("app.cash.sqldelight:coroutines-extensions-jvm:1.5.5")
 
-    // OkHttp
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
 
-    // EventBus
     implementation("org.greenrobot:eventbus:3.3.1")
 
-    // WorkManager
     implementation("androidx.work:work-runtime-ktx:2.10.0")
 
-    // Core
     implementation("androidx.core:core-ktx:1.15.0")
 
-    // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
 
-    // Gson for JSON
     implementation("com.google.code.gson:gson:2.11.0")
 }

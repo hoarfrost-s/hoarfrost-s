@@ -1,6 +1,5 @@
 package com.hyperfetch.engine
 
-import com.hyperfetch.entity.TaskChunkEntity
 import com.hyperfetch.event.EventBusWrapper
 import com.hyperfetch.event.ProgressEvent
 import com.hyperfetch.model.*

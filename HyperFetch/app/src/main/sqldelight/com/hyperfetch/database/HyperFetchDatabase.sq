@@ -1,0 +1,115 @@
+CREATE TABLE IF NOT EXISTS download_tasks (
+    id TEXT PRIMARY KEY NOT NULL,
+    url TEXT NOT NULL,
+    fileName TEXT NOT NULL,
+    totalSize INTEGER DEFAULT 0,
+    downloaded INTEGER DEFAULT 0,
+    category TEXT DEFAULT 'OTHER',
+    status TEXT DEFAULT 'QUEUED',
+    priority TEXT DEFAULT 'NORMAL',
+    threadCount INTEGER DEFAULT 4,
+    speedLimit INTEGER DEFAULT 9223372036854775807,
+    savePath TEXT DEFAULT '',
+    createTime INTEGER DEFAULT 0,
+    retryCount INTEGER DEFAULT 0,
+    errorMessage TEXT
+);
+
+CREATE TABLE IF NOT EXISTS task_chunks (
+    taskId TEXT NOT NULL,
+    `index` INTEGER NOT NULL,
+    start INTEGER NOT NULL,
+    end INTEGER NOT NULL,
+    downloaded INTEGER DEFAULT 0,
+    status TEXT DEFAULT 'PENDING',
+    PRIMARY KEY (taskId, `index`)
+);
+
+CREATE TABLE IF NOT EXISTS config (
+    key TEXT PRIMARY KEY NOT NULL,
+    value TEXT NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_download_tasks_status ON download_tasks(status);
+CREATE INDEX IF NOT EXISTS idx_download_tasks_category ON download_tasks(category);
+CREATE INDEX IF NOT EXISTS idx_download_tasks_createTime ON download_tasks(createTime);
+
+SELECT_ALL_TASKS:
+SELECT * FROM download_tasks ORDER BY createTime DESC;
+
+SELECT_TASKS_BY_CATEGORY:
+SELECT * FROM download_tasks WHERE category = ? ORDER BY createTime DESC;
+
+SELECT_TASKS_BY_STATUS:
+SELECT * FROM download_tasks WHERE status = ? ORDER BY createTime DESC;
+
+SELECT_TASK_BY_ID:
+SELECT * FROM download_tasks WHERE id = ?;
+
+SELECT_PENDING_TASKS:
+SELECT * FROM download_tasks WHERE status IN ('QUEUED', 'DOWNLOADING', 'PAUSED');
+
+SELECT_DOWNLOADING_COUNT:
+SELECT COUNT(*) FROM download_tasks WHERE status = 'DOWNLOADING';
+
+SELECT_QUEUED_COUNT:
+SELECT COUNT(*) FROM download_tasks WHERE status = 'QUEUED';
+
+INSERT_TASK:
+INSERT OR REPLACE INTO download_tasks (
+    id, url, fileName, totalSize, downloaded, category, status,
+    priority, threadCount, speedLimit, savePath, createTime, retryCount, errorMessage
+) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+
+UPDATE_TASK:
+UPDATE download_tasks SET
+    url = ?, fileName = ?, totalSize = ?, downloaded = ?, category = ?, status = ?,
+    priority = ?, threadCount = ?, speedLimit = ?, savePath = ?, createTime = ?,
+    retryCount = ?, errorMessage = ?
+WHERE id = ?;
+
+UPDATE_TASK_STATUS:
+UPDATE download_tasks SET status = ? WHERE id = ?;
+
+UPDATE_PROGRESS:
+UPDATE download_tasks SET downloaded = ?, totalSize = ? WHERE id = ?;
+
+UPDATE_TASK_ERROR:
+UPDATE download_tasks SET status = ?, errorMessage = ?, retryCount = retryCount + 1 WHERE id = ?;
+
+COMPLETE_TASK:
+UPDATE download_tasks SET status = ?, downloaded = ?, errorMessage = NULL WHERE id = ?;
+
+DELETE_TASK_BY_ID:
+DELETE FROM download_tasks WHERE id = ?;
+
+DELETE_ALL_TASKS:
+DELETE FROM download_tasks;
+
+SELECT_CHUNKS_BY_TASK_ID:
+SELECT * FROM task_chunks WHERE taskId = ? ORDER BY `index` ASC;
+
+SELECT_CHUNK:
+SELECT * FROM task_chunks WHERE taskId = ? AND `index` = ?;
+
+INSERT_CHUNK:
+INSERT OR REPLACE INTO task_chunks (taskId, `index`, start, end, downloaded, status)
+VALUES (?, ?, ?, ?, ?, ?);
+
+UPDATE_CHUNK:
+UPDATE task_chunks SET downloaded = ?, status = ? WHERE taskId = ? AND `index` = ?;
+
+DELETE_CHUNKS_BY_TASK_ID:
+DELETE FROM task_chunks WHERE taskId = ?;
+
+DELETE_COMPLETED_CHUNKS:
+DELETE FROM task_chunks WHERE taskId = ? AND status = 'COMPLETED';
+
+SELECT_CONFIG:
+SELECT value FROM config WHERE key = ?;
+
+INSERT_CONFIG:
+INSERT OR REPLACE INTO config (key, value) VALUES (?, ?);
+
+DELETE_CONFIG:
+DELETE FROM config WHERE key = ?;
