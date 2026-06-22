@@ -2,7 +2,7 @@ plugins {
     id("com.android.application")
     id("kotlin-android")
     id("org.jetbrains.kotlin.plugin.compose")
-    id("app.cash.sqldelight") version "2.0.0"
+    id("app.cash.sqldelight") version "1.5.5"
 }
 
 android {
@@ -50,7 +50,6 @@ sqldelight {
     databases {
         create("HyperFetchDatabase") {
             packageName.set("com.hyperfetch.database")
-            dialect("app.cash.sqldelight:sqlite-primitive-dialect:2.0.0")
         }
     }
 }
@@ -78,8 +77,8 @@ dependencies {
 
     implementation("androidx.navigation:navigation-compose:2.8.5")
 
-    implementation("app.cash.sqldelight:android-driver:2.0.0")
-    implementation("app.cash.sqldelight:coroutines-extensions-jvm:2.0.0")
+    implementation("app.cash.sqldelight:android-driver:1.5.5")
+    implementation("app.cash.sqldelight:coroutines-extensions-jvm:1.5.5")
 
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
 
