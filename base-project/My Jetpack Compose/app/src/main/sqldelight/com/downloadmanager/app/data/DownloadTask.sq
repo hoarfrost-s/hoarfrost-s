@@ -1,0 +1,94 @@
+CREATE TABLE download_task (
+    id TEXT NOT NULL PRIMARY KEY,
+    url TEXT NOT NULL,
+    file_name TEXT NOT NULL,
+    original_name TEXT NOT NULL,
+    total_size INTEGER NOT NULL DEFAULT 0,
+    downloaded_size INTEGER NOT NULL DEFAULT 0,
+    thread_count INTEGER NOT NULL DEFAULT 3,
+    speed_limit INTEGER NOT NULL DEFAULT 0,
+    status TEXT NOT NULL DEFAULT 'pending',
+    category_id TEXT,
+    sub_category_id TEXT,
+    save_path TEXT NOT NULL,
+    temp_path TEXT NOT NULL,
+    mime_type TEXT,
+    md5_hash TEXT,
+    error_message TEXT,
+    created_at INTEGER NOT NULL,
+    updated_at INTEGER NOT NULL,
+    completed_at INTEGER
+);
+
+getTaskById:
+SELECT * FROM download_task WHERE id = ?;
+
+getAllTasks:
+SELECT * FROM download_task ORDER BY created_at DESC;
+
+getActiveTasks:
+SELECT * FROM download_task 
+WHERE status IN ('pending', 'downloading', 'paused', 'waiting')
+ORDER BY created_at DESC;
+
+getTasksByStatus:
+SELECT * FROM download_task WHERE status = ? ORDER BY created_at DESC;
+
+getTasksByCategory:
+SELECT * FROM download_task WHERE category_id = ? ORDER BY created_at DESC;
+
+getDownloadCountByCategory:
+SELECT category_id, COUNT(*) as count 
+FROM download_task 
+GROUP BY category_id;
+
+getRecentTasks:
+SELECT * FROM download_task ORDER BY created_at DESC LIMIT ?;
+
+insertTask:
+INSERT INTO download_task (
+    id, url, file_name, original_name, total_size, downloaded_size,
+    thread_count, speed_limit, status, category_id, sub_category_id,
+    save_path, temp_path, mime_type, md5_hash, error_message,
+    created_at, updated_at, completed_at
+) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+
+updateTaskStatus:
+UPDATE download_task SET status = ?, updated_at = ? WHERE id = ?;
+
+updateProgress:
+UPDATE download_task SET downloaded_size = ?, updated_at = ? WHERE id = ?;
+
+updateTask:
+UPDATE download_task SET
+    url = ?,
+    file_name = ?,
+    original_name = ?,
+    total_size = ?,
+    downloaded_size = ?,
+    thread_count = ?,
+    speed_limit = ?,
+    status = ?,
+    category_id = ?,
+    sub_category_id = ?,
+    save_path = ?,
+    temp_path = ?,
+    mime_type = ?,
+    md5_hash = ?,
+    error_message = ?,
+    updated_at = ?,
+    completed_at = ?
+WHERE id = ?;
+
+deleteTask:
+DELETE FROM download_task WHERE id = ?;
+
+deleteCompletedTasks:
+DELETE FROM download_task WHERE status = 'completed';
+
+getTotalDownloadedSize:
+SELECT COALESCE(SUM(downloaded_size), 0) FROM download_task;
+
+getTodayDownloadCount:
+SELECT COUNT(*) FROM download_task 
+WHERE created_at >= ? AND created_at < ?;

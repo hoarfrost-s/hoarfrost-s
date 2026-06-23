@@ -14,6 +14,6 @@ dependencyResolutionManagement {
   }
 }
 
-rootProject.name = "My Jetpack Compose"
+rootProject.name = "DownloadManager"
 
 include(":app")

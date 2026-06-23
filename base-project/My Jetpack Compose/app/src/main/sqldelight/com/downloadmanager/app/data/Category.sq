@@ -1,0 +1,108 @@
+CREATE TABLE category (
+    id TEXT NOT NULL PRIMARY KEY,
+    name TEXT NOT NULL UNIQUE,
+    icon_res TEXT,
+    sort_order INTEGER NOT NULL DEFAULT 0,
+    is_default INTEGER NOT NULL DEFAULT 0,
+    created_at INTEGER NOT NULL
+);
+
+CREATE TABLE sub_category (
+    id TEXT NOT NULL PRIMARY KEY,
+    extension TEXT NOT NULL,
+    category_id TEXT NOT NULL,
+    sort_order INTEGER NOT NULL DEFAULT 0,
+    created_at INTEGER NOT NULL,
+    FOREIGN KEY (category_id) REFERENCES category(id)
+);
+
+getAllCategories:
+SELECT * FROM category ORDER BY sort_order ASC;
+
+getCategoryById:
+SELECT * FROM category WHERE id = ?;
+
+getCategoryByName:
+SELECT * FROM category WHERE name = ?;
+
+insertCategory:
+INSERT INTO category (id, name, icon_res, sort_order, is_default, created_at)
+VALUES (?, ?, ?, ?, ?, ?);
+
+updateCategory:
+UPDATE category SET name = ?, icon_res = ?, sort_order = ? WHERE id = ?;
+
+deleteCategory:
+DELETE FROM category WHERE id = ?;
+
+getSubCategoriesByCategory:
+SELECT * FROM sub_category WHERE category_id = ? ORDER BY sort_order ASC;
+
+getSubCategoryById:
+SELECT * FROM sub_category WHERE id = ?;
+
+insertSubCategory:
+INSERT INTO sub_category (id, extension, category_id, sort_order, created_at)
+VALUES (?, ?, ?, ?, ?);
+
+deleteSubCategory:
+DELETE FROM sub_category WHERE id = ?;
+
+matchByExtension:
+SELECT 
+    c.id AS category_id,
+    c.name AS category_name,
+    sc.id AS sub_id,
+    sc.extension AS extension
+FROM sub_category sc
+INNER JOIN category c ON sc.category_id = c.id
+WHERE sc.extension = ?
+LIMIT 1;
+
+insertDefaultCategories:
+INSERT OR IGNORE INTO category (id, name, icon_res, sort_order, is_default, created_at)
+VALUES 
+    ('cat_video', '视频', 'ic_video', 0, 1, ?),
+    ('cat_archive', '压缩包', 'ic_archive', 1, 1, ?),
+    ('cat_audio', '音频', 'ic_audio', 2, 1, ?),
+    ('cat_apk', '安装包', 'ic_apk', 3, 1, ?),
+    ('cat_doc', '文档', 'ic_doc', 4, 1, ?),
+    ('cat_other', '其他', 'ic_other', 99, 1, ?);
+
+insertDefaultSubCategories:
+INSERT OR IGNORE INTO sub_category (id, extension, category_id, sort_order, created_at)
+VALUES 
+    ('sub_mp4', 'mp4', 'cat_video', 0, ?),
+    ('sub_m3u8', 'm3u8', 'cat_video', 1, ?),
+    ('sub_mkv', 'mkv', 'cat_video', 2, ?),
+    ('sub_avi', 'avi', 'cat_video', 3, ?),
+    ('sub_mov', 'mov', 'cat_video', 4, ?),
+    ('sub_flv', 'flv', 'cat_video', 5, ?),
+    ('sub_wmv', 'wmv', 'cat_video', 6, ?),
+    ('sub_webm', 'webm', 'cat_video', 7, ?),
+    ('sub_ts', 'ts', 'cat_video', 8, ?),
+    ('sub_zip', 'zip', 'cat_archive', 0, ?),
+    ('sub_rar', 'rar', 'cat_archive', 1, ?),
+    ('sub_7z', '7z', 'cat_archive', 2, ?),
+    ('sub_tar', 'tar', 'cat_archive', 3, ?),
+    ('sub_gz', 'gz', 'cat_archive', 4, ?),
+    ('sub_bz2', 'bz2', 'cat_archive', 5, ?),
+    ('sub_xz', 'xz', 'cat_archive', 6, ?),
+    ('sub_mp3', 'mp3', 'cat_audio', 0, ?),
+    ('sub_flac', 'flac', 'cat_audio', 1, ?),
+    ('sub_wav', 'wav', 'cat_audio', 2, ?),
+    ('sub_aac', 'aac', 'cat_audio', 3, ?),
+    ('sub_ogg', 'ogg', 'cat_audio', 4, ?),
+    ('sub_wma', 'wma', 'cat_audio', 5, ?),
+    ('sub_m4a', 'm4a', 'cat_audio', 6, ?),
+    ('sub_apk', 'apk', 'cat_apk', 0, ?),
+    ('sub_xapk', 'xapk', 'cat_apk', 1, ?),
+    ('sub_apkm', 'apkm', 'cat_apk', 2, ?),
+    ('sub_pdf', 'pdf', 'cat_doc', 0, ?),
+    ('sub_docx', 'docx', 'cat_doc', 1, ?),
+    ('sub_doc', 'doc', 'cat_doc', 2, ?),
+    ('sub_xlsx', 'xlsx', 'cat_doc', 3, ?),
+    ('sub_xls', 'xls', 'cat_doc', 4, ?),
+    ('sub_pptx', 'pptx', 'cat_doc', 5, ?),
+    ('sub_ppt', 'ppt', 'cat_doc', 6, ?),
+    ('sub_txt', 'txt', 'cat_doc', 7, ?);

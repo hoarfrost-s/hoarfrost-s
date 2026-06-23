@@ -1,5 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">My Jetpack Compose</string>
+    <string name="app_name">下载管理器</string>
+    <string name="nav_home">首页</string>
+    <string name="nav_downloads">下载</string>
+    <string name="nav_settings">设置</string>
+    <string name="nav_category_manage">分类管理</string>
 
+    <string name="tab_all">全部</string>
+    <string name="tab_downloading">下载中</string>
+    <string name="tab_completed">已完成</string>
+    <string name="tab_failed">失败</string>
+
+    <string name="content_desc_search">搜索</string>
+    <string name="content_desc_select_all">全选</string>
+    <string name="content_desc_unselect_all">取消全选</string>
+    <string name="selected_count">已选 %1$d 项</string>
+
+    <string name="action_start">开始</string>
+    <string name="action_pause">暂停</string>
+    <string name="action_delete">删除</string>
+    <string name="action_share">分享</string>
+    <string name="action_retry">重试</string>
+
+    <string name="empty_all_title">暂无下载任务</string>
+    <string name="empty_all_desc">开始下载你的第一个文件吧</string>
+    <string name="empty_downloading_title">暂无下载中任务</string>
+    <string name="empty_downloading_desc">所有下载任务已完成或暂停</string>
+    <string name="empty_completed_title">暂无已完成任务</string>
+    <string name="empty_completed_desc">完成的下载任务会显示在这里</string>
+    <string name="empty_failed_title">暂无失败任务</string>
+    <string name="empty_failed_desc">失败的下载任务会显示在这里</string>
+
+    <string name="status_pending">等待中</string>
+    <string name="status_downloading">下载中</string>
+    <string name="status_paused">已暂停</string>
+    <string name="status_completed">已完成</string>
+    <string name="status_failed">失败</string>
+    <string name="status_cancelled">已取消</string>
+    <string name="status_waiting">排队中</string>
+
+    <string name="category_video">视频</string>
+    <string name="category_audio">音频</string>
+    <string name="category_image">图片</string>
+    <string name="category_document">文档</string>
+    <string name="category_archive">压缩包</string>
+    <string name="category_apk">应用</string>
+    <string name="category_other">其他</string>
+
+    <string name="time_remaining">剩余 %1$s</string>
+    <string name="completed_at">完成于 %1$s</string>
 </resources>
